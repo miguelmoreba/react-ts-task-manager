@@ -1,11 +1,14 @@
+import Button from './Button'
+
 interface IHeaderProps {
     title: string
 }
 
 export default function Header({title}: IHeaderProps) {
     return (
-        <div>
+        <header className='header'>
             <h1>{title}</h1>
-        </div>
+            <Button color='green' text='Hello'/>
+        </header>
     )
 }
