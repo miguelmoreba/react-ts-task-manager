@@ -32,13 +32,14 @@ function App() {
 // Delete task
 
 const deleteTask = (id: number) => {
-  console.log('delete ', id);
+  // console.log('delete ', id);
+  setTasks(tasks.filter(task => task.id !== id));
 }
 
   return (
     <div className='container'>
       <Header title='Hello'/>
-      <Tasks tasks={tasks} onDelete={deleteTask}></Tasks>
+      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask}></Tasks>: 'No tasks to show'}
     </div>
   );
 }
