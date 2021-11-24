@@ -1,15 +1,16 @@
+import { MouseEvent } from 'react';
+
 interface IButtonProps {
     color: string,
     text: string,
-    onClick: Function
+    onClick: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-const Button = ({color, text}: IButtonProps) => {
-    
-    const onClick = () => {}
+const Button = ({color, text, onClick}: IButtonProps) => {
+
 
     return (
-        <button onClick={onClick}style={{backgroundColor: color}} className='btn'>Add</button>
+        <button onClick={onClick} style={{backgroundColor: color}} className='btn'>Add</button>
     )
 }
 
