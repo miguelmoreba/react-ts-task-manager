@@ -1,20 +1,20 @@
-import Button from './Button'
-import {MouseEvent} from 'react'
+import Button from "./Button";
 
 interface IHeaderProps {
-    title: string
+  title: string;
+  onAdd: () => void;
+  showAddTask: boolean;
 }
 
-export default function Header({title}: IHeaderProps) {
-
-    const onClick: (event: MouseEvent<HTMLButtonElement>) => void = (e) => {
-        console.log(e)
-    }
-
-    return (
-        <header className='header'>
-            <h1>{title}</h1>
-            <Button color='green' text='Hello' onClick={onClick}/>
-        </header>
-    )
+export default function Header({ title, onAdd, showAddTask }: IHeaderProps) {
+  return (
+    <header className="header">
+      <h1>{title}</h1>
+      <Button
+        color={showAddTask ? "black" : "green"}
+        text={showAddTask ? "Close" : "Add"}
+        onClick={onAdd}
+      />
+    </header>
+  );
 }

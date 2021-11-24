@@ -4,6 +4,9 @@ import { useState } from "react";
 import AddTask from "./components/AddTask";
 
 function App() {
+
+  const [showAddTask, setShowAddTask] = useState(false);
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -52,8 +55,8 @@ function App() {
 
   return (
     <div className="container">
-      <Header title="Hello" />
-      <AddTask onAdd={addTask}/>
+      <Header showAddTask={showAddTask} onAdd={() => setShowAddTask(!showAddTask)} title="Task Tracker" />
+      {showAddTask && <AddTask onAdd={addTask}/>}
       {tasks.length > 0 ? (
         <Tasks
           onToggle={toggleReminder}
