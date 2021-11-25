@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import Footer from "./components/Footer"
 import { useState } from "react";
 import AddTask from "./components/AddTask";
 
@@ -66,6 +67,7 @@ function App() {
       ) : (
         "No tasks to show"
       )}
+      <Footer/>
     </div>
   );
 }
