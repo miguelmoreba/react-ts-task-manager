@@ -7,11 +7,12 @@ const Main = ({showAddTask}) => {
   
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      const res = await axios.get('http://localhost:5000/tasks');
-      const data = res.data;
+    const fetchTasks = () => {
+      axios.get('http://localhost:5000/tasks')
+        .then(res => {
+          console.log(res.data)
+        })
 
-      console.log(data);
     }
 
     fetchTasks();
