@@ -3,19 +3,11 @@ import { useEffect, useState } from "react";
 import AddTask from "./AddTask";
 import axios from "axios";
 
-const Main = ({showAddTask}) => {
-  
-
+const Main = ({ showAddTask }) => {
   useEffect(() => {
-    const fetchTasks = () => {
-      axios.get('http://localhost:5000/tasks')
-        .then(res => {
-          console.log(res.data)
-        })
-
-    }
-
-    fetchTasks();
+    axios.get("http://localhost:5000/tasks").then((res) => {
+      console.log(res.data);
+    });
   }, []);
 
   const [tasks, setTasks] = useState([
