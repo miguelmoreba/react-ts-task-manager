@@ -1,9 +1,21 @@
 import Tasks from "./Tasks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./AddTask";
+import axios from "axios";
 
 const Main = ({showAddTask}) => {
   
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const res = await axios.get('http://localhost:5000/tasks');
+      const data = res.data;
+
+      console.log(data);
+    }
+
+    fetchTasks();
+  }, []);
 
   const [tasks, setTasks] = useState([
     {
