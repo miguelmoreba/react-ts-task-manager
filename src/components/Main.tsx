@@ -17,25 +17,56 @@ const Main = ({ showAddTask }) => {
   // Add Task
 
   const addTask = (task) => {
-    const id = Math.floor(Math.random() * 1000) + 1;
-    const newTask = { id, ...task };
-    tasks.length > 0 && setTasks([...tasks, newTask]);
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json' 
+      }
+    }
+
+    const data = JSON.stringify(task);
+
+    axios.post(`http://localhost:5000/tasks`, data, config)
+      .then(res => {
+        setTasks([...tasks, res.data])
+      });
   };
 
   // Delete task
   const deleteTask = (id: number) => {
-    // console.log('delete ', id);
-    setTasks(tasks.filter((task) => task.id !== id));
+
+    axios.delete(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE'
+    })
+      .then(() => {
+        setTasks(tasks.filter((task) => task.id !== id));
+      });
   };
 
   // Toggle reminder
 
   const toggleReminder = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
-      )
-    );
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json' 
+      }
+    }
+
+    axios.get(`http://localhost:5000/tasks/${id}`)
+      .then((res) => {
+        const taskToToggle = res.data;
+        const updTask = {...taskToToggle, reminder: !taskToToggle.reminder}
+        const data = JSON.stringify(updTask);
+        axios.put(`http://localhost:5000/tasks/${id}`, data, config)
+          .then((res) => {
+            setTasks(
+              tasks.map((task) =>
+                task.id === id ? res.data : task
+              )
+            );
+          })
+      });
   };
 
   return (
